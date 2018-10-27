@@ -1,0 +1,11 @@
+C:\Users\FUJITSU\source\repos\PEA_1\PEA_1\bin\Release\PEA_1.exe.config
+C:\Users\FUJITSU\source\repos\PEA_1\PEA_1\bin\Release\PEA_1.exe
+C:\Users\FUJITSU\source\repos\PEA_1\PEA_1\bin\Release\PEA_1.pdb
+C:\Users\FUJITSU\source\repos\PEA_1\PEA_1\obj\Release\PEA_1.Menu.resources
+C:\Users\FUJITSU\source\repos\PEA_1\PEA_1\obj\Release\PEA_1.Properties.Resources.resources
+C:\Users\FUJITSU\source\repos\PEA_1\PEA_1\obj\Release\PEA_1.ShowResult.resources
+C:\Users\FUJITSU\source\repos\PEA_1\PEA_1\obj\Release\PEA_1.csproj.GenerateResource.cache
+C:\Users\FUJITSU\source\repos\PEA_1\PEA_1\obj\Release\PEA_1.csproj.CoreCompileInputs.cache
+C:\Users\FUJITSU\source\repos\PEA_1\PEA_1\obj\Release\PEA_1.exe
+C:\Users\FUJITSU\source\repos\PEA_1\PEA_1\obj\Release\PEA_1.pdb
+C:\Users\FUJITSU\source\repos\PEA_1\PEA_1\obj\Release\PEA_1.csprojAssemblyReference.cache
