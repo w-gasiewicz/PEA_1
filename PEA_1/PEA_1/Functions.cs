@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PEA_1
@@ -29,19 +26,33 @@ namespace PEA_1
             for (int i = 0; i < Menu.cityQua; i++)
                 show += "(" + i + ") ";
             show += Environment.NewLine;
-            string temp = "";//pomocniczy string do zczytywania kolejnych linii
+            string temp = "Z";//pomocniczy string do zczytywania kolejnych linii
             for (int i = 0; i < Menu.cityQua; i++)
             {
-                temp = "(" + i + ")->";//wierzcholki
+                temp = "(" + i + ")->";//cities
                 for (int j = 0; j < Menu.cityQua; j++)
                 {
-                    temp += "[" + Menu.citiesArray[i, j] + "] ";
+                    temp += "[" + Menu.citiesArray[i, j] + "] ";//here we add to string cost of reach following city
 
                 }
                 show += temp + Environment.NewLine;
             }
-
+            show += Environment.NewLine+"Miasta pionowo to miasta z których idziemy. np: z miasta 1 do miasta 2 trasa = "+Menu.citiesArray[1,2].ToString();
             return show;
+        }
+        public string ShowAlgorithmResult(List<int> resultList, int cost)
+        {//this function prepares string with result to show in result winform.
+            string result = "";
+
+            for (int i = 0; i < resultList.Count-1; i++)
+            {
+                result += resultList[i].ToString() + " -> ";
+            }
+            result += resultList[resultList.Count-1].ToString();
+            result +=  Environment.NewLine;
+            result += "Najmniejszy koszt odwiedzenia wszystkich miast zgodnie z założeniami problemu komiwojażera to: " + cost + Environment.NewLine;
+
+            return result;
         }
     }
 }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PEA_1
 {
@@ -19,7 +15,7 @@ namespace PEA_1
                 for(int j=0;j<i;j++)
                 {
                     tab[i,j]= rand.Next(from, to);
-                    tab[j, i] = tab[i, j];
+                    tab[j, i] = rand.Next(from, to);
                 }
             }
             return tab;
