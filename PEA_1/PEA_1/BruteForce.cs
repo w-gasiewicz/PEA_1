@@ -23,8 +23,7 @@ namespace PEA_1
                 _visitedCities[destination] = true;
                 for (int i = 0; i < Menu.cityQua; i++)
                 {
-                    c++;
-                    if (!_visitedCities[i] && _citiesMatrix[destination, i] != 0)
+                    if (!_visitedCities[i] && destination!=i)
                     {
                         _cost += _citiesMatrix[destination, i];
                         VisitCities(i);
@@ -33,7 +32,7 @@ namespace PEA_1
                 }
                 _visitedCities[destination] = false;
             }
-            else if(_citiesMatrix[0,destination]!=0)
+            else if(_citiesMatrix[0,destination]!=0 && _citiesMatrix[0, destination] != -1)
             {
                 _cost += _citiesMatrix[destination, 0];
 
@@ -60,7 +59,6 @@ namespace PEA_1
             }
             _route.Add(0);
             VisitCities(0);
-            Console.WriteLine("test=" + c);
             return bestRouteCost;
         }
         public List<int> GetRoute()

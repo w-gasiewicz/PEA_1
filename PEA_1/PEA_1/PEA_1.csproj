@@ -45,8 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BranchAndBound.cs" />
     <Compile Include="BruteForce.cs" />
-    <Compile Include="DP_algorithm.cs" />
     <Compile Include="Functions.cs" />
     <Compile Include="Generate.cs" />
     <Compile Include="Menu.cs">
