@@ -19,14 +19,14 @@ namespace PEA_1
             bool isNumber = int.TryParse(text, out number);//check that given value is int value
             return isNumber;
         }
-        public string ShowCities()//wyswitlanie grafu w fomie mcierzy
+        public string ShowCities()//show graph as matrix
         {
             string show = "Ilość miast= " + Menu.cityQua + Environment.NewLine;
             show += "       ";
             for (int i = 0; i < Menu.cityQua; i++)
                 show += "(" + i + ") ";
             show += Environment.NewLine;
-            string temp = "Z";//pomocniczy string do zczytywania kolejnych linii
+            string temp = "Z";//help string to read next lines
             for (int i = 0; i < Menu.cityQua; i++)
             {
                 temp = "(" + i + ")->";//cities

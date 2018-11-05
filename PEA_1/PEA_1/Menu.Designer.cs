@@ -50,6 +50,8 @@
             this.graphStatus_lbl = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.ShowGraph_btn = new System.Windows.Forms.Button();
+            this.TestingProgressBar = new System.Windows.Forms.ProgressBar();
+            this.Tests_lbl = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ReadFromFile_btn
@@ -57,7 +59,7 @@
             this.ReadFromFile_btn.Location = new System.Drawing.Point(658, 147);
             this.ReadFromFile_btn.Name = "ReadFromFile_btn";
             this.ReadFromFile_btn.Size = new System.Drawing.Size(130, 46);
-            this.ReadFromFile_btn.TabIndex = 0;
+            this.ReadFromFile_btn.TabIndex = 7;
             this.ReadFromFile_btn.Text = "Wczytaj z pliku";
             this.ReadFromFile_btn.UseVisualStyleBackColor = true;
             this.ReadFromFile_btn.Click += new System.EventHandler(this.ReadFromFile_btn_Click);
@@ -85,7 +87,7 @@
             this.StartTesting_btn.Location = new System.Drawing.Point(658, 34);
             this.StartTesting_btn.Name = "StartTesting_btn";
             this.StartTesting_btn.Size = new System.Drawing.Size(130, 46);
-            this.StartTesting_btn.TabIndex = 68;
+            this.StartTesting_btn.TabIndex = 9;
             this.StartTesting_btn.Text = "Rozpocznij 100 - krotny test";
             this.StartTesting_btn.UseVisualStyleBackColor = true;
             this.StartTesting_btn.Click += new System.EventHandler(this.StartTesting_btn_Click);
@@ -124,7 +126,7 @@
             this.CityQua_txt.Location = new System.Drawing.Point(117, 34);
             this.CityQua_txt.Name = "CityQua_txt";
             this.CityQua_txt.Size = new System.Drawing.Size(98, 22);
-            this.CityQua_txt.TabIndex = 70;
+            this.CityQua_txt.TabIndex = 1;
             this.CityQua_txt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CityQua_txt_KeyPress);
             this.CityQua_txt.Leave += new System.EventHandler(this.CityQua_txt_Leave);
             // 
@@ -133,7 +135,7 @@
             this.Generate_btn.Location = new System.Drawing.Point(85, 107);
             this.Generate_btn.Name = "Generate_btn";
             this.Generate_btn.Size = new System.Drawing.Size(130, 46);
-            this.Generate_btn.TabIndex = 72;
+            this.Generate_btn.TabIndex = 4;
             this.Generate_btn.Text = "Generuj";
             this.Generate_btn.UseVisualStyleBackColor = true;
             this.Generate_btn.Click += new System.EventHandler(this.Generate_btn_Click);
@@ -170,7 +172,7 @@
             this.From_txt.Location = new System.Drawing.Point(47, 79);
             this.From_txt.Name = "From_txt";
             this.From_txt.Size = new System.Drawing.Size(61, 22);
-            this.From_txt.TabIndex = 76;
+            this.From_txt.TabIndex = 2;
             this.From_txt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.From_txt_KeyPress);
             // 
             // To_txt
@@ -178,7 +180,7 @@
             this.To_txt.Location = new System.Drawing.Point(154, 79);
             this.To_txt.Name = "To_txt";
             this.To_txt.Size = new System.Drawing.Size(61, 22);
-            this.To_txt.TabIndex = 77;
+            this.To_txt.TabIndex = 3;
             this.To_txt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.To_txt_KeyPress);
             this.To_txt.Leave += new System.EventHandler(this.To_txt_Leave);
             // 
@@ -187,7 +189,7 @@
             this.EndTestingMode_btn.Location = new System.Drawing.Point(522, 34);
             this.EndTestingMode_btn.Name = "EndTestingMode_btn";
             this.EndTestingMode_btn.Size = new System.Drawing.Size(130, 46);
-            this.EndTestingMode_btn.TabIndex = 78;
+            this.EndTestingMode_btn.TabIndex = 10;
             this.EndTestingMode_btn.Text = "Wyjdź z trybu testowego";
             this.EndTestingMode_btn.UseVisualStyleBackColor = true;
             this.EndTestingMode_btn.Click += new System.EventHandler(this.EndTestingMode_btn_Click);
@@ -208,7 +210,7 @@
             this.Start_btn.Location = new System.Drawing.Point(292, 107);
             this.Start_btn.Name = "Start_btn";
             this.Start_btn.Size = new System.Drawing.Size(130, 46);
-            this.Start_btn.TabIndex = 80;
+            this.Start_btn.TabIndex = 6;
             this.Start_btn.Text = "Start";
             this.Start_btn.UseVisualStyleBackColor = true;
             this.Start_btn.Click += new System.EventHandler(this.Start_btn_Click);
@@ -217,12 +219,12 @@
             // 
             this.AlgorithmKind_combo.FormattingEnabled = true;
             this.AlgorithmKind_combo.Items.AddRange(new object[] {
-            "Programowanie dynamiczne HELD-KARP",
-            "Przegląd zupełny (brute force)"});
+            "Przegląd zupełny (brute force)",
+            "Branch & Bound"});
             this.AlgorithmKind_combo.Location = new System.Drawing.Point(221, 37);
             this.AlgorithmKind_combo.Name = "AlgorithmKind_combo";
             this.AlgorithmKind_combo.Size = new System.Drawing.Size(295, 24);
-            this.AlgorithmKind_combo.TabIndex = 81;
+            this.AlgorithmKind_combo.TabIndex = 5;
             // 
             // label5
             // 
@@ -260,16 +262,34 @@
             this.ShowGraph_btn.Location = new System.Drawing.Point(522, 147);
             this.ShowGraph_btn.Name = "ShowGraph_btn";
             this.ShowGraph_btn.Size = new System.Drawing.Size(130, 46);
-            this.ShowGraph_btn.TabIndex = 85;
+            this.ShowGraph_btn.TabIndex = 8;
             this.ShowGraph_btn.Text = "Wyświetl aktualny graf";
             this.ShowGraph_btn.UseVisualStyleBackColor = true;
             this.ShowGraph_btn.Click += new System.EventHandler(this.ShowGraph_btn_Click);
+            // 
+            // TestingProgressBar
+            // 
+            this.TestingProgressBar.Location = new System.Drawing.Point(221, 170);
+            this.TestingProgressBar.Name = "TestingProgressBar";
+            this.TestingProgressBar.Size = new System.Drawing.Size(295, 23);
+            this.TestingProgressBar.TabIndex = 86;
+            // 
+            // Tests_lbl
+            // 
+            this.Tests_lbl.AutoSize = true;
+            this.Tests_lbl.Location = new System.Drawing.Point(119, 176);
+            this.Tests_lbl.Name = "Tests_lbl";
+            this.Tests_lbl.Size = new System.Drawing.Size(96, 17);
+            this.Tests_lbl.TabIndex = 87;
+            this.Tests_lbl.Text = "Postęp testów";
             // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 205);
+            this.Controls.Add(this.Tests_lbl);
+            this.Controls.Add(this.TestingProgressBar);
             this.Controls.Add(this.ShowGraph_btn);
             this.Controls.Add(this.graphStatus_lbl);
             this.Controls.Add(this.label8);
@@ -323,6 +343,8 @@
         private System.Windows.Forms.Label graphStatus_lbl;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button ShowGraph_btn;
+        private System.Windows.Forms.ProgressBar TestingProgressBar;
+        private System.Windows.Forms.Label Tests_lbl;
     }
 }
 
