@@ -7,8 +7,7 @@ namespace PEA_1
     class Functions
     {
         public string ChooseFile()
-        {
-            //choose file with data
+        {  //choose file with data
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.ShowDialog();
             return ofd.FileName;// save path to file
@@ -26,7 +25,7 @@ namespace PEA_1
             for (int i = 0; i < Menu.cityQua; i++)
                 show += "(" + i + ") ";
             show += Environment.NewLine;
-            string temp = "Z";//help string to read next lines
+            string temp = "";//help string to read next lines
             for (int i = 0; i < Menu.cityQua; i++)
             {
                 temp = "(" + i + ")->";//cities
