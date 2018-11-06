@@ -11,13 +11,13 @@ namespace PEA_1
     public partial class Menu : Form
     {
         Functions run= new Functions();
-        public static int cityQua;
-        public static int[,] citiesArray;
+        public static int cityQua;//number of cities
+        public static int[,] citiesArray;//matrix for graph
 
-        private Generate _startGenerate = new Generate();
-        private bool _testMode = false;
-        private List<int> _algorithmResult;
-        private Stopwatch _stopwatch;
+        private Generate _startGenerate = new Generate();//variable to start generating new instantion
+        private bool _testMode = false;//variable to make us know that testmode is activated
+        private List<int> _algorithmResult;//list for path with algorithms result
+        private Stopwatch _stopwatch;//variable to measuring time
 
         public Menu()
         {
@@ -204,7 +204,7 @@ namespace PEA_1
                     {
                         _stopwatch = Stopwatch.StartNew();//start measuring time
                         cost= bf.BruteForceAlgorithm();
-                        _stopwatch.Stop();
+                        _stopwatch.Stop();//stop measuring time
                         _algorithmResult = bf.GetRoute();
                     
                         WorkTime_txt.Text = _stopwatch.Elapsed.TotalMilliseconds.ToString();
