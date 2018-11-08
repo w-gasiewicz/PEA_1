@@ -5,78 +5,74 @@ namespace PEA_1
 {
     class BranchAndBound
     {
-        int t = 0;
         private int _totalCost;//total cost of visiting all cities
         private int _numberOfCities = Menu.cityQua;//number of cities in graph
         private int[,] _originalMatrix = Menu.citiesArray;//original cities matrix
-        private int _weight = -1;
+        private int _weight = -1;//it will be the best route weight
 
         List<int> resultPathList = new List<int>();//list for reasult path
         List<bool> visitedCities = new List<bool>(Menu.cityQua);//list of visited cities
 
         public List<int> Start()
-        {
+        {//in this function we start branch & bound algorithm
             for (int i = 0; i < _numberOfCities; i++)//this loop fill list with allready visited cities
             {
               visitedCities.Add(false);
               resultPathList.Add(0);
             }
             int[] tempPath = new int[_numberOfCities];//create tempPath array
-            BaB(0, 0, 0,tempPath, 0);//here we start branch and bound function
-            resultPathList.Insert(0, 0);//insert stat city to the result list
+            Branch(0, 0, 0,tempPath, 0);//here we start branch and bound function
+            resultPathList.Insert(0, 0);//insert start city to the result list at the first place
             return resultPathList;
         }
         public int GetCost() { return _totalCost; }
                
-        private void BaB(int v0,int v,int w,int[] tempPath,int index)
-        {
+        private void Branch(int startCity,int city,int w,int[] tempPath,int index)
+        {//function search for new paths| startCity-city where we start, city-actual processed city,w-weight of actual route,tempPath-actual traveled route,index-tell us how much of route was traveled
             int val;
-            visitedCities[v] = true;
-            if (Ifend())//Check if all nodes was visited
+            visitedCities[city] = true;//we set actual city as visited
+            if (Ifend())//Check if all cities was visited
             {
-                if (v!=v0)//Check if from last node there is route to first one
+                if (city!=startCity)//Check if from last city there is route to first one
                 {
                     if (_weight == -1)//Set new route weight
                     {
-                        _weight = w + _originalMatrix[v, v0];
+                        _weight = w + _originalMatrix[city, startCity];
                         for (int i = 0; i < _numberOfCities; i++)
                             resultPathList[i] = tempPath[i];
                     }
                     else
-                        if (_weight > w + _originalMatrix[v, v0])//Check if new weight is smaller than old one
+                        if (_weight > w + _originalMatrix[city, startCity])//Check if new weight is smaller than old one
                     {
-                        _weight = w + _originalMatrix[v, v0];//Save currently the best path
+                        _weight = w + _originalMatrix[city, startCity];//Save currently the best path
                         for (int i = 0; i < _numberOfCities; i++)
                             resultPathList[i] = tempPath[i];
                     }
                 }
-                visitedCities[v] = false;
+                visitedCities[city] = false;//when algorithm goes back we set city as not visited
                 return;//Return to search another route
             }
-            else
+            else//if some city was not visited
             {
                 for (int i = 0; i < _numberOfCities; i++)
                 {
-                    val = Bound(v) + w;
-                    Console.WriteLine("v="+v+" val=" + val + " w=" + w+" t="+t);
-                    if (v!=i && visitedCities[i] == false && (val < _weight || _weight == -1))//Check if from node v there is route to another node and if node value is smaller than weight
+                    val = Bound(city) + w;//add path and potential path weight
+                    if (city!=i && visitedCities[i] == false && (val < _weight || _weight == -1))//check if from actual city is road to another one
                     {
-                        tempPath[index] = i;
-                        Console.WriteLine("v0=" + v0 + " i=" + i + " weigth="+ w + _originalMatrix[v, i]+" index="+index);
-                        BaB(v0, i, w + _originalMatrix[v,i], tempPath, index + 1);//If yes call function with new parameter
+                        tempPath[index] = i;//we have another potential road
+                        Branch(startCity, i, w + _originalMatrix[city,i], tempPath, index + 1);//If yes call function with new parameter
                     }
-                    if (v == v0 && i == _numberOfCities - 1)//if actual city equals start city and actual i index equals the last city
+                    if (city == startCity && i == _numberOfCities - 1)//if actual city equals start city and actual i index equals the last city
                     {//End of algorithm
                         if (_weight > 0)
                         {
-                            int j = v0;
                             _totalCost = _weight;
                         }
                         else
                         return;
                     }
                 }
-                visitedCities[v] = false;
+                visitedCities[city] = false;
                 return;
             }
         }
@@ -89,17 +85,17 @@ namespace PEA_1
             }
             return true;
         }
-        int Bound(int v)
+        int Bound(int v)//return sum of minimum ways which goes out from not visited cities and actual city
         {
             int min = 0, value = 0;
             for (int i = 0; i < _numberOfCities; i++)
             {
-                if (visitedCities[i] == false || i == v)//if actual city was not visited or   we need to search this line of matrix
+                if (visitedCities[i] == false || i == v)//if actual city was not visited or i is actual city we need to search this line of matrix
                 {
                     for (int j = 0; j < _numberOfCities; j++)
                     {
                         if (i != j && visitedCities[j] == false)//if we're not trying to find way from A to A and we dont allready visited city number j we need to search for minimum in this column of matrix
-                        {
+                        {//if actual min value is smaller we use it
                             if (min == 0)
                                 min = _originalMatrix[i,j];
                             else

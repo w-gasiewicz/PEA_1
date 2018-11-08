@@ -80,7 +80,7 @@ namespace PEA_1
                         }
 
                         line = line.Remove(0, line.Length - temp.Length + 1);
-                        citiesArray[counter, j] = Convert.ToInt32(temp2);
+                        citiesArray[counter, j] = Convert.ToInt32(temp2);//fill matrix with distances
                     }
                     counter++;
                 }
@@ -200,7 +200,7 @@ namespace PEA_1
                     BruteForce bf = new BruteForce();
                     int cost = 0;
 
-                    if (!_testMode)
+                    if (!_testMode)//if we're not in testmode we start algorithm like this
                     {
                         _stopwatch = Stopwatch.StartNew();//start measuring time
                         cost= bf.BruteForceAlgorithm();
@@ -209,7 +209,7 @@ namespace PEA_1
                     
                         WorkTime_txt.Text = _stopwatch.Elapsed.TotalMilliseconds.ToString();
                         ShowResult sr = new ShowResult(run.ShowAlgorithmResult(_algorithmResult, cost));
-                        sr.ShowDialog();
+                        sr.ShowDialog();//show algorithm result
                     }
                     else
                         bf.BruteForceAlgorithm();
@@ -218,7 +218,7 @@ namespace PEA_1
                 {//here we're doing branch & bound algorithm
                     _algorithmResult = new List<int>(cityQua);
                     BranchAndBound bb = new BranchAndBound();
-                    if (!_testMode)
+                    if (!_testMode)//if we're not in testmode we start algorithm like this
                     {
                         _stopwatch = Stopwatch.StartNew();//start measuring time
                     _algorithmResult = bb.Start();
@@ -226,7 +226,7 @@ namespace PEA_1
 
                     WorkTime_txt.Text = _stopwatch.Elapsed.TotalMilliseconds.ToString();
                         ShowResult sr = new ShowResult(run.ShowAlgorithmResult(_algorithmResult, bb.GetCost()));
-                        sr.ShowDialog();
+                        sr.ShowDialog();//show result of the algorithm
                     }
                     else
                         bb.Start();

@@ -313,7 +313,7 @@
             this.Controls.Add(this.WorkTime_txt);
             this.Controls.Add(this.ReadFromFile_btn);
             this.Name = "Menu";
-            this.Text = "Menu";
+            this.Text = "Wojciech Gąsiewicz 235086";
             this.ResumeLayout(false);
             this.PerformLayout();
 
