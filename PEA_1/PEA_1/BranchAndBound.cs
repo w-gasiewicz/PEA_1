@@ -10,11 +10,18 @@ namespace PEA_1
         private int[,] _originalMatrix = Menu.citiesArray;//original cities matrix
         private int _weight = -1;//it will be the best route weight
 
+        private int _iter = 0;
+        private int _allIters = 1;
+
         List<int> resultPathList = new List<int>();//list for reasult path
         List<bool> visitedCities = new List<bool>(Menu.cityQua);//list of visited cities
 
         public List<int> Start()
         {//in this function we start branch & bound algorithm
+            for(int i=2;i<_numberOfCities;i++)
+            {
+                _allIters = _allIters * i;
+            }
             for (int i = 0; i < _numberOfCities; i++)//this loop fill list with allready visited cities
             {
               visitedCities.Add(false);
@@ -33,6 +40,7 @@ namespace PEA_1
             visitedCities[city] = true;//we set actual city as visited
             if (Ifend())//Check if all cities was visited
             {
+                _iter++;
                 if (city!=startCity)//Check if from last city there is route to first one
                 {
                     if (_weight == -1)//Set new route weight
@@ -54,21 +62,21 @@ namespace PEA_1
             }
             else//if some city was not visited
             {
-                for (int i = 0; i < _numberOfCities; i++)
+                for (int i = 1; i < _numberOfCities; i++)
                 {
-                    val = Bound(city) + w;//add path and potential path weight
+                    val = Bound(city) +w;//add path and potential path weight
                     if (city!=i && visitedCities[i] == false && (val < _weight || _weight == -1))//check if from actual city is road to another one
                     {
                         tempPath[index] = i;//we have another potential road
                         Branch(startCity, i, w + _originalMatrix[city,i], tempPath, index + 1);//If yes call function with new parameter
-                    }
-                    if (city == startCity && i == _numberOfCities - 1)//if actual city equals start city and actual i index equals the last city
+                    } Console.WriteLine(_iter);
+                    if (city == startCity && i == _numberOfCities - 1 /*&& _iter == _allIters*/)//if actual city equals start city and actual i index equals the last city
                     {//End of algorithm
                         if (_weight > 0)
                         {
                             _totalCost = _weight;
                         }
-                        else
+                        else if(_iter == _allIters)
                         return;
                     }
                 }
@@ -87,7 +95,8 @@ namespace PEA_1
         }
         int Bound(int v)//return sum of minimum ways which goes out from not visited cities and actual city
         {
-            int min = 0, value = 0;
+            int value = 0;
+            int min = Int32.MaxValue;
             for (int i = 0; i < _numberOfCities; i++)
             {
                 if (visitedCities[i] == false || i == v)//if actual city was not visited or i is actual city we need to search this line of matrix
@@ -96,16 +105,16 @@ namespace PEA_1
                     {
                         if (i != j && visitedCities[j] == false)//if we're not trying to find way from A to A and we dont allready visited city number j we need to search for minimum in this column of matrix
                         {//if actual min value is smaller we use it
-                            if (min == 0)
-                                min = _originalMatrix[i,j];
-                            else
-                                if (_originalMatrix[i,j] < min)
-                                min = _originalMatrix[i,j];
+                            if (_originalMatrix[i, j] < min)
+                                 min = _originalMatrix[i, j];
                         }
                     }
                 }
-                value += min;
-                min = 0;
+                if (min != Int32.MaxValue)
+                {
+                    value += min;
+                    min = Int32.MaxValue;
+                }
             }
             return value;
         }       

@@ -67,6 +67,8 @@ namespace PEA_1
                     for(int j=0;j<cityQua;j++)
                     {
                        line=line.Trim();//delete all leading and trailing white-space characters from actuall line
+                        if (line == "")
+                            break;
                         space = line.IndexOf(" ");
                         if (j==cityQua-1)
                         { citiesArray[counter, j] = Convert.ToInt32(line); break; }

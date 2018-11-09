@@ -57,6 +57,7 @@ namespace PEA_1
             VisitCities(0);//call function finding best path for start city
             return _actualBestCost;
         }
+       
         public List<int> GetRoute()
         {
             return _route;
