@@ -36,11 +36,11 @@ namespace PEA_1
 
                 if(_cost<_actualBestCost)//if we menaged to find better cost we optimize it
                 {
-                    _actualBestCost = _cost;
+                    _actualBestCost = _cost; Console.WriteLine(_actualBestCost);
                     for (int i = 0; i < _actualCity; i++)//in this loop we copy tempRoute to the result route
                     {                        
-                        _route[i] = _tempRoute[i];
-                    }
+                        _route[i] = _tempRoute[i]; Console.Write(_route[i] + "->");
+                    }Console.WriteLine();
                 }
                 _cost -= _citiesMatrix[startCity, 0];//reduce cost by value of cost from startCity to 0
             }
