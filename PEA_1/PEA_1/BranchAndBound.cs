@@ -35,7 +35,6 @@ namespace PEA_1
             visitedCities[city] = true;//we set actual city as visited
             if (Ifend())//Check if all cities was visited
             {
-               // iter++;
                 if (city!=startCity)//Check if from last city there is route to first one
                 {
                         if (_weight > w + _originalMatrix[city, startCity])//Check if new weight is smaller than old one
@@ -44,7 +43,7 @@ namespace PEA_1
                         for (int i = 0; i < _numberOfCities; i++)
                         {
                             resultPathList[i] = tempPath[i];
-                            Console.Write(resultPathList[i] + "->");
+                           // Console.Write(resultPathList[i] + "->");
                         }
                     }
                     else if (_weight == -1)//Set new route weight
@@ -53,10 +52,10 @@ namespace PEA_1
                         for (int i = 0; i < _numberOfCities; i++)
                         {
                             resultPathList[i] = tempPath[i];
-                            Console.Write(resultPathList[i] + "->");
+                           // Console.Write(resultPathList[i] + "->");
                         }                      
                     }
-                    Console.WriteLine();
+                   // Console.WriteLine();
                 }
                 visitedCities[city] = false;//when algorithm goes back we set city as not visited
                 return;//Return to search another route
@@ -110,11 +109,11 @@ namespace PEA_1
 
             for (int i = 0; i < _numberOfCities; i++)
             {
-                if (visitedCities[i] == false || i == v)//if actual city was not visited or i is actual city we need to search this line of matrix
+                if (!visitedCities[i] || i == v )//if actual city was not visited or i is actual city we need to search this line of matrix
                 {
                     for (int j = 0; j < _numberOfCities; j++)
                     {
-                        if (( j!=i)/*|| v!=j*/)//if we're not trying to find way from A to A and we dont allready visited city number j we need to search for minimum in this column of matrix
+                        if ((visitedCities[v] && i==v) || (!visitedCities[j] && j != i) /*&& v!=j */)//if we're not trying to find way from A to A and we dont allready visited city number j we need to search for minimum in this column of matrix
                         {//if actual min value is smaller we use it
                             if (_originalMatrix[i, j] < min)
                                  min = _originalMatrix[i, j];
