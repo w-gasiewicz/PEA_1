@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace PEA_1
 {
     class BranchAndBound
     {
-        int iter = 0;
-
         private int _totalCost;//total cost of visiting all cities
         private int _numberOfCities = Menu.cityQua;//number of cities in graph
         private int[,] _originalMatrix = Menu.citiesArray;//original cities matrix
@@ -43,7 +42,6 @@ namespace PEA_1
                         for (int i = 0; i < _numberOfCities; i++)
                         {
                             resultPathList[i] = tempPath[i];
-                           // Console.Write(resultPathList[i] + "->");
                         }
                     }
                     else if (_weight == -1)//Set new route weight
@@ -52,10 +50,8 @@ namespace PEA_1
                         for (int i = 0; i < _numberOfCities; i++)
                         {
                             resultPathList[i] = tempPath[i];
-                           // Console.Write(resultPathList[i] + "->");
                         }                      
                     }
-                   // Console.WriteLine();
                 }
                 visitedCities[city] = false;//when algorithm goes back we set city as not visited
                 return;//Return to search another route
@@ -74,11 +70,11 @@ namespace PEA_1
                         lastval = val;
                     }
 
-                    if (city!=i && visitedCities[i] == false && (val <= _weight || _weight == -1))//check if from actual city is road to another one
+                    if (city!=i && visitedCities[i] == false && (val < _weight || _weight == -1))//check if from actual city is road to another one
                     {
                         tempPath[index] = i;//we have another potential road
                         Branch(startCity, i, w + _originalMatrix[city,i], tempPath, index + 1);//If yes call function with new parameter
-                    } 
+                    }                    
                     if (city == startCity && i == _numberOfCities - 1)//if actual city equals start city and actual i index equals the last city
                     {//End of algorithm
                         if (_weight > 0)
@@ -106,26 +102,25 @@ namespace PEA_1
         {
             int value = 0;
             int min = Int32.MaxValue;
-
+            
             for (int i = 0; i < _numberOfCities; i++)
             {
                 if (!visitedCities[i] || i == v )//if actual city was not visited or i is actual city we need to search this line of matrix
                 {
                     for (int j = 0; j < _numberOfCities; j++)
-                    {
-                        if ((visitedCities[v] && i==v) || (!visitedCities[j] && j != i) /*&& v!=j */)//if we're not trying to find way from A to A and we dont allready visited city number j we need to search for minimum in this column of matrix
+                    {  
+                        if ((!visitedCities[j] && i != j) || (j==0 && j!=i))//if we're not trying to find way from A to A and we dont allready visited city number j we need to search for minimum in this column of matrix
                         {//if actual min value is smaller we use it
                             if (_originalMatrix[i, j] < min)
                                  min = _originalMatrix[i, j];
-                        }
+                        }                      
                     }
                 }
+                
                 if (min != Int32.MaxValue)
                 {
-                    value += min;
-                    if (value > _weight && _weight!=-1)
-                        return Int32.MaxValue;
-                    min = Int32.MaxValue;
+                    value += min;                   
+                    min = Int32.MaxValue;                    
                 }
             }
             return value;

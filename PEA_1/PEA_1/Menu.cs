@@ -159,27 +159,46 @@ namespace PEA_1
 
         private void StartTesting_btn_Click(object sender, EventArgs e)
         {//functions start testing
-            TestingProgressBar.Value = 0;
-            TestingProgressBar.Step = 1;
-            testStatus_label.Text = "Aktywne";
-            testStatus_label.ForeColor = Color.Green;
-            TestingProgressBar.Visible = true; Tests_lbl.Visible = true;
-            _testMode = true;
-
-            double testingTime = 0;
-            
-            //in this loop for given cities number and distances range we run the chosen algorithm 100 times.
-            //Each time for a new random set
-            for (int i=0;i<100;i++)
+            try
             {
-                Generate_btn.PerformClick();
-                _stopwatch = Stopwatch.StartNew();
-                Start_btn.PerformClick();
-                _stopwatch.Stop();
-                testingTime += Convert.ToDouble(_stopwatch.ElapsedMilliseconds);
-                TestingProgressBar.PerformStep();
+                TestingProgressBar.Value = 0;
+                TestingProgressBar.Step = 1;
+                testStatus_label.Text = "Aktywne";
+                testStatus_label.ForeColor = Color.Green;
+                TestingProgressBar.Visible = true; Tests_lbl.Visible = true;
+                _testMode = true;
+
+                double testingTime = 0;
+
+                //in this loop for given cities number and distances range we run the chosen algorithm 100 times.
+                //Each time for a new random set
+                for (int i = 0; i < 100; i++)
+                {
+                    Generate_btn.PerformClick();
+                    _stopwatch = Stopwatch.StartNew();
+                    Start_btn.PerformClick();
+                    _stopwatch.Stop();
+                    testingTime += Convert.ToDouble(_stopwatch.ElapsedMilliseconds);
+                    TestingProgressBar.PerformStep();
+                }
+                WorkTime_txt.Text = (testingTime / 100).ToString();
+
+                //do testow
+                for (int i = 0; i < 100; i++)
+                {
+                    Generate_btn.PerformClick();
+                    BruteForce brute = new BruteForce();
+                    BranchAndBound bnb = new BranchAndBound();
+                    int bb, bf;
+                    bf = brute.BruteForceAlgorithm();
+                    bnb.Start();
+                    bb = bnb.GetCost();
+
+                    if (bf != bb)
+                        MessageBox.Show("error");
+                }
             }
-            WorkTime_txt.Text = (testingTime / 100).ToString();
+            catch(Exception ex) { MessageBox.Show(ex.ToString(), "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         private void CityQua_txt_Leave(object sender, EventArgs e)
@@ -193,7 +212,7 @@ namespace PEA_1
         }
 
         private void Start_btn_Click(object sender, EventArgs e)
-        {//start selcted algorithm and show result of it with ShowResult class
+        {//start selcted algorithm and show result of it with ShowResult class        
             try
             {
                 if (AlgorithmKind_combo.SelectedItem.ToString().Contains("Przegląd zupełny"))
